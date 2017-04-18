@@ -3,28 +3,31 @@
 (function(exports) {
 
   function Account() {
-    this.balance = 0;
-    this.transactions = [];
+    this._balance = 0;
+    this._transactions = [];
   }
 
   Account.prototype.deposit = function (amount) {
-    var transaction = new Transaction(amount);
-    this.transactions.push(transaction);
+    this._saveTransaction(amount);
     this._incrementBalance(amount);
   };
 
   Account.prototype.withdraw = function (amount) {
-    var transaction = new Transaction(-Math.abs(amount));
-    this.transactions.push(transaction);
+    this._saveTransaction(-Math.abs(amount));
     this._decrementBalance(amount);
   };
 
+  Account.prototype._saveTransaction = function (amount) {
+    var transaction = new Transaction(amount);
+    this._transactions.push(transaction);
+  };
+
   Account.prototype._incrementBalance = function (amount) {
-    this.balance += amount;
+    this._balance += amount;
   };
 
   Account.prototype._decrementBalance = function (amount) {
-    this.balance -= amount;
+    this._balance -= amount;
   };
 
   exports.Account = Account;
