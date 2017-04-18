@@ -41,6 +41,4 @@ describe("Account", function() {
     });
   });
 
-
-
 });
