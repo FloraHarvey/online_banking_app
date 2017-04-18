@@ -3,16 +3,21 @@
 describe("Statement", function() {
   var statement;
   var dummyAccount;
-  var dummyTransaction;
+  var dummyCreditTransaction;
+  var dummyDebitTransaction;
 
   beforeEach(function() {
-    dummyTransaction = {
+    dummyCreditTransaction = {
       'amount': 100,
       'date': new Date()
     };
+    dummyDebitTransaction = {
+      'amount': -10,
+      'date': new Date()
+    };
     dummyAccount = {
-      '_transactions': [dummyTransaction],
-      '_balance': 100
+      '_transactions': [dummyCreditTransaction, dummyDebitTransaction],
+      '_balance': 90
     };
     statement = new Statement(dummyAccount);
   });
@@ -22,15 +27,26 @@ describe("Statement", function() {
   });
 
   describe("viewing statement", function() {
+    var date;
+    var dateOptions;
+    var formattedDate;
+
+    beforeEach(function() {
+      date = new Date();
+      dateOptions = { year: "numeric", month: "2-digit", day: "2-digit" };
+      formattedDate = date.toLocaleDateString("en-UK", dateOptions);
+    });
+
     it("prints table header for transaction history", function() {
       expect(statement.printStatementHeaders()).toEqual("date || credit || debit || balance");
     });
 
-    it("prints details for a single transaction", function() {
-      var date = new Date();
-      var dateOptions = { year: "numeric", month: "2-digit", day: "2-digit" };
-      var formattedDate = date.toLocaleDateString("en-UK", dateOptions);
-      expect(statement.printTransactionDetails(dummyTransaction)).toEqual(formattedDate + " ||   || 100.00 || 100.00");
+    it("prints details for a single positive transaction", function() {
+      expect(statement.printTransactionDetails(dummyCreditTransaction)).toEqual(formattedDate + " || 100.00 ||   || 90.00");
+    });
+
+    it("prints details for a single negative transaction", function() {
+      expect(statement.printTransactionDetails(dummyDebitTransaction)).toEqual(formattedDate + " ||   || 10.00 || 90.00");
     });
 
   });
