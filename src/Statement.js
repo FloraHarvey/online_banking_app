@@ -10,9 +10,20 @@
     return "date || credit || debit || balance";
   };
 
+  Statement.prototype.printAllTransactions = function () {
+    var balance = this.account._balance;
+    var toPrint = "";
+    for (var i=this.account._transactions.length; i > 0; i--) {
+      var transaction = this.account._transactions[i - 1];
+      toPrint += this.printTransactionDetails(transaction) + balance.toFixed(2) + "\n";
+      balance -= transaction.amount;
+    }
+    return toPrint;
+  };
+
   Statement.prototype.printTransactionDetails = function (transaction) {
     var date = this._formatDate(transaction.date);
-    return date + this._printCredit(transaction) + this._printDebit(transaction) + this.account._balance.toFixed(2);
+    return date + this._printCredit(transaction) + this._printDebit(transaction);
   };
 
   Statement.prototype._printCredit = function (transaction) {

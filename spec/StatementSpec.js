@@ -42,11 +42,15 @@ describe("Statement", function() {
     });
 
     it("prints details for a single positive transaction", function() {
-      expect(statement.printTransactionDetails(dummyCreditTransaction)).toEqual(formattedDate + " || 100.00 ||   || 90.00");
+      expect(statement.printTransactionDetails(dummyCreditTransaction)).toEqual(formattedDate + " || 100.00 ||   || ");
     });
 
     it("prints details for a single negative transaction", function() {
-      expect(statement.printTransactionDetails(dummyDebitTransaction)).toEqual(formattedDate + " ||   || 10.00 || 90.00");
+      expect(statement.printTransactionDetails(dummyDebitTransaction)).toEqual(formattedDate + " ||   || 10.00 || ");
+    });
+
+    it("prints details for list of transactions", function() {
+      expect(statement.printAllTransactions()).toEqual(formattedDate + " ||   || 10.00 || 90.00\n" + formattedDate + " || 100.00 ||   || 100.00\n");
     });
 
   });
