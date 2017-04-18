@@ -12,7 +12,7 @@ describe("Transaction", function() {
   });
 
   it("saves the date of the transaction", function() {
-    expect(transaction.date).toEqual(new Date());
+    expect(transaction.date.getDate()).toEqual(new Date().getDate());
   });
 
 

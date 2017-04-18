@@ -27,4 +27,20 @@ describe("Account", function() {
     });
   });
 
+  describe("withdrawing", function() {
+    it("minuses the withdrawn amount from the account balance", function() {
+      account.deposit(100);
+      account.withdraw(10);
+      expect(account.balance).toEqual(90);
+    });
+
+    it("saves the transaction to the transaction history", function() {
+      account.deposit(100);
+      account.withdraw(10);
+      expect(account.transactions[1].amount).toEqual(-10);
+    });
+  });
+
+
+
 });
