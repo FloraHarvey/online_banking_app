@@ -17,6 +17,11 @@
     this._decrementBalance(amount);
   };
 
+  Account.prototype.generateStatement = function () {
+    var statement = new Statement(this);
+    return statement.printFullStatement();
+  };
+
   Account.prototype._saveTransaction = function (amount) {
     var transaction = new Transaction(amount);
     this._transactions.push(transaction);

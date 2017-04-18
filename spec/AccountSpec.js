@@ -41,4 +41,12 @@ describe("Account", function() {
     });
   });
 
+  describe("viewingStatement", function() {
+    it("creates a new statement passing in itself", function() {
+      account.deposit(100);
+      account.withdraw(10);
+      expect(account.generateStatement()).toEqual("date || credit || debit || balance\n04/18/2017 ||   || 10.00 || 90.00\n04/18/2017 || 100.00 ||   || 100.00\n");
+    });
+  });
+
 });
