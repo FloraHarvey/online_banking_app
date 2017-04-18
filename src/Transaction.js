@@ -4,6 +4,7 @@
 
   function Transaction(amount) {
     this.amount = amount;
+    this.date = new Date();
   }
 
 

@@ -11,4 +11,9 @@ describe("Transaction", function() {
     expect(transaction.amount).toEqual(100);
   });
 
+  it("saves the date of the transaction", function() {
+    expect(transaction.date).toEqual(new Date());
+  });
+
+
 });
