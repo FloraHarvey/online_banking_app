@@ -7,7 +7,7 @@
   }
 
   Statement.prototype.printStatementHeaders = function () {
-    return "date || credit || debit || balance\n";
+    return "date   || credit || debit || balance\n";
   };
 
   Statement.prototype.printFullStatement = function () {

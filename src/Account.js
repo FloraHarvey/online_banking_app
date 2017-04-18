@@ -13,6 +13,7 @@
   };
 
   Account.prototype.withdraw = function (amount) {
+    if (amount > this._balance) throw("Balance too low");
     this._saveTransaction(-Math.abs(amount));
     this._decrementBalance(amount);
   };

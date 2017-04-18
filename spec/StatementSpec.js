@@ -38,7 +38,7 @@ describe("Statement", function() {
     });
 
     it("prints table header for transaction history", function() {
-      expect(statement.printStatementHeaders()).toEqual("date || credit || debit || balance\n");
+      expect(statement.printStatementHeaders()).toEqual("date   || credit || debit || balance\n");
     });
 
     it("prints details for a single positive transaction", function() {
@@ -54,7 +54,7 @@ describe("Statement", function() {
     });
 
     it("prints full statement", function() {
-      expect(statement.printFullStatement()).toEqual("date || credit || debit || balance\n" + formattedDate + " ||   || 10.00 || 90.00\n" + formattedDate + " || 100.00 ||   || 100.00\n");
+      expect(statement.printFullStatement()).toEqual("date   || credit || debit || balance\n" + formattedDate + " ||   || 10.00 || 90.00\n" + formattedDate + " || 100.00 ||   || 100.00\n");
     });
 
   });

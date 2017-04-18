@@ -39,13 +39,22 @@ describe("Account", function() {
       account.withdraw(10);
       expect(account._transactions[1].amount).toEqual(-10);
     });
+
+    it("throws an exception if withdrawal amount is greater than remaining balance", function() {
+      expect(function(){account.withdraw(10)}).toThrow("Balance too low");
+    });
+
+    it("does not throw an exception if withdrawal amount is less than remaining balance", function() {
+      account.deposit(100);
+      expect(function(){account.withdraw(10)}).not.toThrow();
+    });
   });
 
   describe("viewingStatement", function() {
     it("creates a new statement passing in itself", function() {
       account.deposit(100);
       account.withdraw(10);
-      expect(account.generateStatement()).toEqual("date || credit || debit || balance\n04/18/2017 ||   || 10.00 || 90.00\n04/18/2017 || 100.00 ||   || 100.00\n");
+      expect(account.generateStatement()).toEqual("date   || credit || debit || balance\n04/18/2017 ||   || 10.00 || 90.00\n04/18/2017 || 100.00 ||   || 100.00\n");
     });
   });
 
